@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {PeopleService} from './people.service';
+import { PeopleService } from './people.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,17 +8,31 @@ import {PeopleService} from './people.service';
 })
 export class AppComponent {
   // title = 'rough';
-  people$;
+  people = [];
   // constructor(private peopleService: PeopleService){}
-  constructor(private http: PeopleService){}
+  constructor(private http: PeopleService) {}
 
-  fetchPeople()
+  getJSONRepos()
     {
-        // this.people$ = this.peopleService.fetchPeople();
-        this.people$=this.http.fetchPeople().subscribe();
-        // this.peopleService.fetchPeople().subscribe((people: any[])=>{
-          // console.log(data);
-          // this.products = data;
-    }  
+      this.http.getJSONRepos().subscribe(
+        (data) => {
+          this.people = data.data;
+        },
+        err => console.error(err),
+        () => console.log('done loading foods')
+      );
+    }
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnInit() {
+    // this.getFoods();
+  }
+  getFoods() {
+    this.http.getJSONRepos().subscribe(
+      (data) => {
+        this.people = data['data'];
+      },
+      err => console.error(err),
+      () => console.log('done loading foods')
+    );
+  }
 }
-

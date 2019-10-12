@@ -1,8 +1,8 @@
 <h1>Fetch data</h1>
 
-<button (click)="fetchPeople()">XX</button>
+<button (click)="getJSONRepos()">button</button>
 
 <hr />
 <ul>  
-  <li *ngFor="let item of people$ ">item</li>
+  <li *ngFor="let item of people ">{{item.title}}</li>
 </ul>
